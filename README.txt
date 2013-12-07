@@ -19,11 +19,12 @@ RESOURCES
  Currently Used
  
  Future Integration  
-
+   cURL
+   pycURL
 
 Libraries
  Currently Used
  
  Future Integration
-
+   pycURL
 
