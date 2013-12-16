@@ -21,7 +21,7 @@ def test():
 #    print local_binarysearch(simple_test_quicksort(True),7,0,10)
     print "starting sort"
     sorttime = time.time()*1000
-    testsize = 200000
+    testsize = 10000
     list_test = test_quicksort(testsize)
 #    list_test = [0,1,2,3,4,5,6,7,8,9,10]
     print "quicksort ran "
