@@ -12,9 +12,12 @@ import time
 
 def main():
     #the method called if arcbot is run on its own
-    test()
+    test1()
     exit()
 #    print "not doing nothing, lol"
+def test1():
+    pass
+
 
 def test():
     #a method for quickly testing code
