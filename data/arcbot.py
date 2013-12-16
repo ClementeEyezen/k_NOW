@@ -21,18 +21,24 @@ def test():
 #    print local_binarysearch(simple_test_quicksort(True),7,0,10)
     print "starting sort"
     sorttime = time.time()*1000
-    testsize = 100000
+    testsize = 200000
     list_test = test_quicksort(testsize)
+#    list_test = [0,1,2,3,4,5,6,7,8,9,10]
     print "quicksort ran "
     index = random.randint(0,testsize)
     target = list_test[index]
     print "target = "+str(target)
     print "index  = "+str(index)
-    timestart = time.time()*1000
+    timestart_w = time.time()*1000
+    print weighted_binarysearch(list_test,target,0,testsize)
+    timeend_w = time.time()*1000-timestart_w
+    timestart_b = time.time()*1000
     print local_binarysearch(list_test,target,0,testsize)
+    timeend_b = time.time()*1000-timestart_w
     print "expected = "+str(index)
-    print "search time = "+str(time.time()*1000-timestart)+" ms"
-    print "sort time =   "+str(timestart-sorttime)+" ms"
+    print "Bsearch time = "+str(timeend_b)+" ms"
+    print "Wsearch time = "+str(timeend_w)+" ms"
+    print "sort time =   "+str(timestart_w-sorttime)+" ms"
     
     
 
@@ -111,6 +117,46 @@ def local_binarysearch(list,target,start_index,end_index):
         else:
             print "pivot "+str(pivot_value)+" less than target"
             return local_binarysearch(list,target,pivot_index+1,end_index)
+    
+def weighted_binarysearch(list,target,start_index,end_index):
+    #a binary search algorithm
+    list_length = min(len(list),end_index-start_index)
+    list_length = max(0,list_length)
+    if list_length < 2:
+        print "testing index "+str(start_index)
+        if list[start_index]==target:
+            return start_index
+        else:
+            return -1
+
+    elif list_length == 2:
+        print "testing index "+str(start_index)+","+str(end_index)
+        if list[start_index]==target:
+            return start_index
+        elif list[end_index-1]==target:
+            return end_index-1
+        else:
+            return -1
+#        print list
+    else:
+        slope = (list[end_index-1]-list[start_index])/(end_index-start_index)+1
+        print "slope "+str(slope)
+        pivot_index = int(round((target-list[start_index])/slope))+start_index
+        print "pivot_index = "+str(pivot_index)
+        pivot_value = list[pivot_index]
+        print "pivot value = "+str(pivot_value)
+        if pivot_value==target:
+            print "pivot value is a match"
+            return pivot_index
+        elif pivot_value>target:
+            print "pivot "+str(pivot_value)+" greater than target"
+            print list[start_index:pivot_index]
+            return weighted_binarysearch(list,target,start_index,pivot_index)
+        else:
+            print "pivot "+str(pivot_value)+" less than target"
+            print list[pivot_index+1:end_index]
+            return weighted_binarysearch(list,target,pivot_index+1,end_index)
+
     
     
 def local_quicksort(list,start_index,end_index):
