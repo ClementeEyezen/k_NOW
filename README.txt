@@ -14,7 +14,13 @@ For instance, there have been times where I may have walked into a class or meet
 The goal of [k]NOW is to develop an application that learns about the person using it, so that
   it can provide this type of thinking ahead service. I've decided that Google Now is too slow,
   I would like to do one better. This is the project that will do that.
-  
+
+METHODS
+ The AI represents knowledge possibly in a number of ways. The first is
+  the graph representation, which links similar concepts and has
+  different levels for different levels of abstraction via 
+  parent-child relations.
+
 RESOURCES
  Currently Used
  
