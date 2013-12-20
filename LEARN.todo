@@ -2,10 +2,8 @@ This is the tracker for the next steps in learning about the various parts of
  the development that I am less familiar with.
 
 cURL/libcurl dev 
--How does curl/libcurl work in C
--How does curl/libcurl work with python
--How to use curl to talk with Twitter
-   - This was recommended as a simple interface that I could start with
+# a basic understanding achieved
+-moving right into talking with GCal hopefully
 
 Pickle
 -How does pickle work
