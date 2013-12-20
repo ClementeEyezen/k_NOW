@@ -11,6 +11,7 @@ class Token():
         return str(name)
     
     def setName(self,name1=None):
+        global name
         try:
             name = str(name1)
             print "name set to "+str(name1)

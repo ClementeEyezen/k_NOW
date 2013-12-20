@@ -1,0 +1,21 @@
+This is the tracker for the next steps in learning about the various parts of
+ the development that I am less familiar with.
+
+cURL/libcurl dev 
+-How does curl/libcurl work in C
+-How does curl/libcurl work with python
+-How to use curl to talk with Twitter
+   - This was recommended as a simple interface that I could start with
+
+Pickle
+-How does pickle work
+-Best practices
+-Begin saving knowledge Graphs using pickle
+  -supposedly options for text or binary save
+  -evaluate the value for the two
+
+Pyftpdlib
+-How does it work?
+-Using it
+-Use it to allow access to existing (pickle) files so that [k]NOW instances on
+  different machines can collectively share knowledge data
