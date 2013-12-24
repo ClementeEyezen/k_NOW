@@ -21,6 +21,8 @@ from oauth2client import tools
 
 from datetime import time
 from datetime import datetime
+from GCal import CalendarManager
+from data import DayCalendar
 
 
 # Parser for command-line arguments.
@@ -72,6 +74,9 @@ def main(argv):
         
         page_token = None
         while True:
+            global manager
+            manager = CalendarManager.CalendarManager()
+            
             filename = 'cal_write_'+str(datetime.now())+'.txt'
             mode = 'w' #'w' for write, 'a' for append, 'r' for read, 'r+' for read/write
             file1 = open(filename,mode)
@@ -81,8 +86,14 @@ def main(argv):
                                                         pageToken=page_token,
                                                         ).execute()
             for calendar_list_entry in calendar_list['items']:
-                file1.write((str(calendar_list_entry['summary'])+'          ')[0:10]+'   '+str(calendar_list_entry['id'])+"\n")
+                file1.write((str(calendar_list_entry['summary'])+'          ')[0:10]+' '+str(calendar_list_entry['id'])+"\n")
                 print calendar_list_entry['summary']
+                temp_id = calendar_list_entry['id']
+                temp_cal = DayCalendar.DayCalendar(calendar_list_entry['summary'],temp_id,[])
+                manager.addCalendar(temp_cal)
+                manager.printCalendar('Classes')
+            
+            
 #            page_token = calendar_list.get('nextPageToken')
 #            if not page_token:
 #                break
