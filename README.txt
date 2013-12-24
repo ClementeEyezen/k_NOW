@@ -23,10 +23,15 @@ METHODS
 
 RESOURCES
  Currently Used
- 
- Future Integration  
    cURL
-   pycURL
+   pycurl
+   Google Client Library
+    -Calendar
+   
+ Future Integration  
+   Google Client Library
+    -Tasks
+    -Contacts
 
 Libraries
  Currently Used

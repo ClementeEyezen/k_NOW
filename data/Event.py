@@ -1,7 +1,8 @@
 from datetime import datetime
 from data import Token
+from data import Node
 
-class Event():
+class Event(Node):
     def __init__(self,event_name,id_,event_date=datetime.now(),start_time=datetime.now().time(),end_time=None):
         global name
         name = event_name
