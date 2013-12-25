@@ -25,7 +25,7 @@ Ch5/
 lynda_sample_test/
 client_secrets.json
 GCal_op/
-sample.dat
+GCal/sample.dat
 
 # External tool builders
 .externalToolBuilders/
