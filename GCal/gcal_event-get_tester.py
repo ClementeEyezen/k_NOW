@@ -1,7 +1,7 @@
 ####################################
-# Run application for Calendar API.
+# Test application for Calendar API.
 # Usage:
-#   $ python gcal_talker.py
+#   $ python gcal_event_tester.py
 ####################################
 
 import argparse
@@ -16,8 +16,6 @@ from oauth2client import tools
 
 from datetime import time
 from datetime import datetime
-from GCal import CalendarManager
-from data import DayCalendar
 
 
 # Parser for command-line arguments.
@@ -69,10 +67,7 @@ def main(argv):
         
         page_token = None
         while True:
-            global manager
-            manager = CalendarManager.CalendarManager()
-            
-            filename = 'cal_list.txt'
+            filename = 'cal_event-get_test.txt'
             mode = 'w' #'w' for write, 'a' for append, 'r' for read, 'r+' for read/write
             file1 = open(filename,mode)
             print file1
@@ -81,13 +76,27 @@ def main(argv):
                                                         pageToken=page_token,
                                                         ).execute()
             for calendar_list_entry in calendar_list['items']:
-                file1.write('name:{'+str(calendar_list_entry['summary'])+'} id:{'+str(calendar_list_entry['id'])+"}\n")
-                print calendar_list_entry['summary']
-                temp_id = calendar_list_entry['id']
-                temp_cal = DayCalendar.DayCalendar(calendar_list_entry['summary'],temp_id,[])
-                manager.addCalendar(temp_cal)
-                manager.printCalendar('Classes')
-            
+                if calendar_list_entry['summary']=='[k]NOW Cal':
+                    temp_name = calendar_list_entry['summary']
+                    print temp_name
+                    temp_id = calendar_list_entry['id']
+                    print temp_id
+                    file1.write('__calendar__')
+                    file1.write(str(temp_name)+"\n")
+                    file1.write(str(temp_id)+"\n")
+                    file1.write('__events__')
+                    event_list = service.events().list(calendarId=calendar_list_entry['id'],
+                                                       singleEvents=True,
+                                                       orderBy='startTime').execute()
+                    for event in event_list['items']:
+                        try:
+                            print event['summary']
+                            write_str = 'name:{'+(event['summary']+'          ')[0:10]+'} id:{'+(str(event['id']))+'} \n'
+                            file1.write(write_str)
+                        except KeyError,ke:
+                            print "Key Error "+str(ke)
+                    file1.close()
+                 
             
 #            page_token = calendar_list.get('nextPageToken')
 #            if not page_token:

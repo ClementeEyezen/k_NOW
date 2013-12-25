@@ -1,13 +1,8 @@
-"""Command-line skeleton application for Calendar API.
-Usage:
-  $ python gcal_talker.py
-
-You can also get help on all the command-line flags the program understands
-by running:
-
-  $ python sample.py --help
-
-"""
+####################################
+# Test application for Calendar API.
+# Usage:
+#   $ python gcal_event_tester.py
+####################################
 
 import argparse
 import httplib2

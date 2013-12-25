@@ -2,7 +2,7 @@ from datetime import datetime
 from data import Token
 from data import Node
 
-class Event(Node):
+class Event():
     def __init__(self,event_name,id_,event_date=datetime.now(),start_time=datetime.now().time(),end_time=None):
         global name
         name = event_name
@@ -50,5 +50,24 @@ class Event(Node):
         except:
             return False
 
-
+    def addConnection(self,connection):
+        global connections
+        connections.append(connection)
+    
+    def removeConnection(self,target):
+        global connections
+        for index,connection in enumerate(connections):
+            if target == connection:
+                connections.remove(index)
+    
+    def setParent(self,parent1):
+        global parent
+        parent = parent1
+    
+    def toString(self):
+        global token_list
+        string = ''
+        for item in token_list:
+            string = string + item.toString()
+        return string
 
