@@ -16,6 +16,7 @@ from oauth2client import tools
 
 from datetime import time
 from datetime import datetime
+from datetime import timedelta
 
 
 # Parser for command-line arguments.
@@ -67,35 +68,63 @@ def main(argv):
         
         page_token = None
         while True:
-            filename = 'cal_event_test_'+str(datetime.now())+'.txt'
-            mode = 'w' #'w' for write, 'a' for append, 'r' for read, 'r+' for read/write
-            file1 = open(filename,mode)
-            print file1
             calendar_list = service.calendarList().list(maxResults=100,
                                                         minAccessRole='reader',
                                                         pageToken=page_token,
                                                         ).execute()
             for calendar_list_entry in calendar_list['items']:
-                if calendar_list_entry['summary']=='Classes':
+                if calendar_list_entry['summary']=='[k]NOW Cal':
                     temp_name = calendar_list_entry['summary']
                     print temp_name
                     temp_id = calendar_list_entry['id']
                     print temp_id
-                    file1.write('__calendar__')
-                    file1.write(str(temp_name)+"\n")
-                    file1.write(str(temp_id)+"\n")
-                    file1.write('__events__')
-                    event_list = service.events().list(calendarId=calendar_list_entry['id'],
+                    start_time = (str(datetime.now())).replace(' ','T')
+                    start_time = start_time[0:len(start_time)-3]+'-05:00'
+                    print 'start = ' + start_time
+                    end_time = (str(datetime.now()+timedelta(0,3600))).replace(' ','T')
+                    end_time = end_time[0:len(end_time)-3]+'-05:00'
+                    print 'end   = ' + end_time
+                    event = {
+                             'summary': 'TestEvent',
+                             'location': 'Somewhere surprisingly close',
+                             'start': {
+                                       'dateTime': start_time
+                                       },
+                             'end': {
+                                     'dateTime': end_time
+                                     },
+                             'attendees': [
+                                           {
+                                            'email': 'mobile.wbaskin@gmail.com'
+                                            # Other attendee's data...
+                                            },
+                                          ],
+                             'description': 'On the day this test was run,\nthis event was created,\nand will last for one hour'
+                            }
+                    try:
+                        sent_event = service.events().insert(calendarId=temp_id, body=event).execute()
+                    except:
+                        print 'Time format error is most likely cause. Event-insert did not function properly'
+                    
+            filename = 'cal_event-set_test.txt'
+            mode = 'w' #'w' for write, 'a' for append, 'r' for read, 'r+' for read/write
+            file1 = open(filename,mode)
+            print file1
+            file1.write('__calendar__'+'\n')
+            file1.write(str(temp_name)+"\n")
+            file1.write(str(temp_id)+"\n")
+            file1.write('__events__\n')
+            event_list = service.events().list(calendarId=temp_id,
                                                        singleEvents=True,
                                                        orderBy='startTime').execute()
-                    for event in event_list['items']:
-                        try:
-                            print event['summary']
-                            write_str = 'name:{'+(event['summary']+'          ')[0:10]+'} id:{'+(str(event['id']))+'} \n'
-                            file1.write(write_str)
-                        except KeyError,ke:
-                            print "Key Error "+str(ke)
-                    file1.close()
+            for event in event_list['items']:
+                try:
+                    print event['summary']+' '+event['id']
+                    write_str = 'name:{'+(event['summary']+'          ')[0:10]+'} id:{'+(str(event['id']))+'} \n'
+                    file1.write(write_str)
+                except KeyError,ke:
+                    print "Key Error "+str(ke)
+            file1.close()
                  
             
 #            page_token = calendar_list.get('nextPageToken')

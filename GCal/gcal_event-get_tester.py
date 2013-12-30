@@ -67,7 +67,7 @@ def main(argv):
         
         page_token = None
         while True:
-            filename = 'cal_event-get_test.txt'
+            filename = 'cal_event_test_'+str(datetime.now())+'.txt'
             mode = 'w' #'w' for write, 'a' for append, 'r' for read, 'r+' for read/write
             file1 = open(filename,mode)
             print file1
@@ -76,7 +76,7 @@ def main(argv):
                                                         pageToken=page_token,
                                                         ).execute()
             for calendar_list_entry in calendar_list['items']:
-                if calendar_list_entry['summary']=='[k]NOW Cal':
+                if calendar_list_entry['summary']=='Classes':
                     temp_name = calendar_list_entry['summary']
                     print temp_name
                     temp_id = calendar_list_entry['id']

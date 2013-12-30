@@ -1,9 +1,10 @@
 from datetime import datetime
+from datetime import timedelta
 from data import Token
 from data import Node
 
 class Event():
-    def __init__(self,event_name,id_,event_date=datetime.now(),start_time=datetime.now().time(),end_time=None):
+    def __init__(self,event_name,id_,event_date=datetime.now(),start_time=datetime.now(),end_time=datetime.now()+timedelta(0,3600),loc='Somewhere'):
         global name
         name = event_name
         global online_id
@@ -14,6 +15,8 @@ class Event():
         s_time = start_time
         global e_time
         e_time = end_time
+        global location
+        location = loc
         if event_date is date:
             global day
             day = event_date.day()
@@ -70,4 +73,26 @@ class Event():
         for item in token_list:
             string = string + item.toString()
         return string
+    
+    def googleCompatible(self):
+        g_end_time = str(e_time).replace(' ','T')
+        g_end_time = g_end_time[0:len(g_end_time)-3]
+        g_start_time = str(s_time).replace(' ','T')
+        g_start_time = g_start_time[0:len(g_start_time)-3]
+        return {
+                'summary': str(name),
+                'location': str(location),
+                'start': {
+                          'dateTime': g_start_time
+                          },
+                'end':   {
+                          'dateTime': g_end_time
+                          },
+                'attendees': [
+                              {
+                               #'email': 'mobile.wbaskin@gmail.com',
+                               # Other attendee's data...
+                               },
+                              ],
+                }
 

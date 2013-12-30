@@ -26,6 +26,9 @@ lynda_sample_test/
 client_secrets.json
 GCal_op/
 sample.dat
+cal_event-set_test.txt
+cal_event_test_2013-12-29 23:42:01.422466.txt
+cal_list.txt
 
 # External tool builders
 .externalToolBuilders/
