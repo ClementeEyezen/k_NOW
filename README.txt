@@ -27,6 +27,9 @@ PLANS
   one for people and one for actions (tasks/goals, as opposed to passive events). These will
   allow for instant integration of the applicable client libraries, and then the addition of
   methods that generate pre-formatted data, as well as accept google-format data.
+ To finalize the above steps, each action will be encapsulated in a class (tentatively) that
+  is created with the correct info to perform the action. In this way, each online interaction
+  can be standardized and consistent, for use with other bits and pieces of the program.
  One further step would be email integration, with the aim to automatically consider events,
   contacts, actions and other data points. The first step in that process is to integrate with
   Gmail (my current mail service of choice) via IMAP or SMTP, then to determine a data type 
