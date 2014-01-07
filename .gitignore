@@ -29,6 +29,7 @@ sample.dat
 cal_event-set_test.txt
 cal_event_test_2013-12-29 23:42:01.422466.txt
 cal_list.txt
+pycURL_sample_test/
 
 # External tool builders
 .externalToolBuilders/
