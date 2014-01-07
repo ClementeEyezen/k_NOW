@@ -74,7 +74,7 @@ class Event():
             string = string + item.toString()
         return string
     
-    def googleCompatible(self):
+    def gen_googleCompatible(self):
         g_end_time = str(e_time).replace(' ','T')
         g_end_time = g_end_time[0:len(g_end_time)-3]
         g_start_time = str(s_time).replace(' ','T')
