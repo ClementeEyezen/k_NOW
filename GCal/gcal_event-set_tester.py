@@ -85,7 +85,7 @@ def main(argv):
                     end_time = end_time[0:len(end_time)-3]+'-05:00'
                     print 'end   = ' + end_time
                     event = {
-                             'summary': 'TestEvent',
+                             'summary': 'TestEven1',
                              'location': 'Somewhere surprisingly close',
                              'start': {
                                        'dateTime': start_time
@@ -96,7 +96,11 @@ def main(argv):
                              'attendees': [
                                            {
                                             'email': 'mobile.wbaskin@gmail.com'
-                                            # Other attendee's data...
+                                            #add self for the following reason
+                                            #when my email is added as an attendee, it will give me the option
+                                            # to say yes, no or maybe to events, so it will automatically get 
+                                            # feedback on where I am, and the AI's predictions for my events
+                                            #Other attendee's data...
                                             },
                                           ],
                              'description': 'On the day this test was run,\nthis event was created,\nand will last for one hour'
@@ -104,7 +108,7 @@ def main(argv):
                     try:
                         sent_event = service.events().insert(calendarId=temp_id, body=event).execute()
                     except:
-                        print 'Time format error is most likely cause. Event-insert did not function properly'
+                        print 'Error while setting event'
                     
             filename = 'cal_event-set_test.txt'
             mode = 'w' #'w' for write, 'a' for append, 'r' for read, 'r+' for read/write
