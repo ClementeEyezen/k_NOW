@@ -100,10 +100,10 @@ def main(argv):
                                             #when my email is added as an attendee, it will give me the option
                                             # to say yes, no or maybe to events, so it will automatically get 
                                             # feedback on where I am, and the AI's predictions for my events
-                                            #Other attendee's data...
                                             },
+                                           #Other attendee's data...
                                           ],
-                             'description': 'On the day this test was run,\nthis event was created,\nand will last for one hour'
+                             'description': 'At the time this test was run,\nthis event was created,\nand will last for one hour'
                             }
                     try:
                         sent_event = service.events().insert(calendarId=temp_id, body=event).execute()

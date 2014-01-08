@@ -30,6 +30,8 @@ class ContactsTest(object):
                 # Display the email addresses for the contact.
                 for email in entry.email:
                     print '    %s' % str(email.address)
+                # Contact ID
+                print 'ID - '+str(entry.name)
                 # Display extended properties.
                 for extended_property in entry.extended_property:
                     if extended_property.value:
