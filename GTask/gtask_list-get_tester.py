@@ -1,7 +1,7 @@
 ####################################
 # Test application for Calendar API.
 # Usage:
-#   $ python gcal_event-get_tester.py
+#   $ python gtask_list-get_tester.py
 ####################################
 
 import argparse
@@ -16,6 +16,10 @@ from oauth2client import tools
 
 from datetime import time
 from datetime import datetime
+
+from data.Task import Task
+from data.Task import TaskList
+from data.Task import TaskManager 
 
 
 # Parser for command-line arguments.
@@ -37,8 +41,8 @@ CLIENT_SECRETS = os.path.join(os.path.dirname(__file__), 'client_secrets.json')
 # <https://developers.google.com/+/best-practices>.
 FLOW = client.flow_from_clientsecrets(CLIENT_SECRETS,
   scope=[
-      'https://www.googleapis.com/auth/calendar',
-      'https://www.googleapis.com/auth/calendar.readonly',
+      'https://www.googleapis.com/auth/tasks',
+      'https://www.googleapis.com/auth/tasks.readonly',
     ],
     message=tools.message_if_missing(CLIENT_SECRETS))
 
@@ -60,55 +64,53 @@ def main(argv):
     http = credentials.authorize(http)
 
     # Construct the service object for the interacting with the Calendar API.
-    service = discovery.build('calendar', 'v3', http=http)
+    service = discovery.build('tasks', 'v1', http=http)
 
     try:
         print "Success! Now add code here."
         
         page_token = None
         while True:
-            filename = 'cal_event_test_'+str(datetime.now())+'.txt'
+            filename = 'task_list_test.txt'
             mode = 'w' #'w' for write, 'a' for append, 'r' for read, 'r+' for read/write
             file1 = open(filename,mode)
             print file1
-            calendar_list = service.calendarList().list(maxResults=100,
-                                                        minAccessRole='reader',
-                                                        pageToken=page_token,
-                                                        ).execute()
-            for calendar_list_entry in calendar_list['items']:
-                if calendar_list_entry['summary']=='Classes':
-                    temp_name = calendar_list_entry['summary']
-                    print temp_name
-                    temp_id = calendar_list_entry['id']
-                    print temp_id
-                    file1.write('__calendar__')
-                    file1.write(str(temp_name)+"\n")
-                    file1.write(str(temp_id)+"\n")
-                    file1.write('__events__')
-                    event_list = service.events().list(calendarId=calendar_list_entry['id'],
-                                                       singleEvents=True,
-                                                       orderBy='startTime').execute()
-                    for event in event_list['items']:
-                        try:
-                            print event['summary']
-                            write_str = 'name:{'+(event['summary']+'          ')[0:10]+'} id:{'+(str(event['id']))+'} \n'
-                            file1.write(write_str)
-                        except KeyError,ke:
-                            print "Key Error "+str(ke)
-                    file1.close()
+            tasklists = service.tasklists().list(maxResults=100,
+                                                pageToken=page_token,
+                                                ).execute()
+            for task_list_entry in tasklists['items']:
+                temp_name = task_list_entry['title']
+                print temp_name
+                temp_id = task_list_entry['id']
+                print temp_id
+                file1.write('__taskList__\n')
+                file1.write(str(temp_name)+"\n")
+                file1.write(str(temp_id)+"\n")
+                file1.write('__tasks__\n')
+                task_list = service.tasks().list(tasklist=task_list_entry['id'],
+                                                 maxResults=100,
+                                                 showCompleted=True
+                                                 ).execute()
+                for task in task_list['items']:
+                    try:
+                        print task['title']
+                        write_str = 'task:{'+(task['title']+'          ')[0:10]+'} id:{'+(str(task['id']))+'} \n'
+                        file1.write(write_str)
+                    except KeyError,ke:
+                        print "Key Error "+str(ke)
                  
             
 #            page_token = calendar_list.get('nextPageToken')
 #            if not page_token:
 #                break
-            break        
+            file1.close()
+            break
         print "Still a success. Code added"
         #from here, now that I can access GCal from here, I now can add code to talk to the API, get info
 
     except client.AccessTokenRefreshError:
         print ("The credentials have been revoked or expired, please re-run"
                "the application to re-authorize")
-
 
 if __name__ == '__main__':
   main(sys.argv)

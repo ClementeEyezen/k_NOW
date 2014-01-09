@@ -23,13 +23,20 @@ Ch3/
 Ch4/
 Ch5/
 lynda_sample_test/
+
+#sensitive info
 client_secrets.json
-GCal_op/
 sample.dat
+nothing_here.smiley
+
+#extra stuff
+GCal_op/
 cal_event-set_test.txt
 cal_event_test_2013-12-29 23:42:01.422466.txt
+cal_event_test_2014-01-09 15:31:36.432912.txt
 cal_list.txt
-nothing_here.smiley
+task_list_test.txt
+
 
 # External tool builders
 .externalToolBuilders/

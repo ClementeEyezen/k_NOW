@@ -1,7 +1,7 @@
 ####################################
 # Test application for Calendar API.
 # Usage:
-#   $ python gcal_event_tester.py
+#   $ python gcal_event-set_tester.py
 ####################################
 
 import argparse
@@ -143,17 +143,5 @@ def main(argv):
                "the application to re-authorize")
 
 
-# For more information on the Calendar API you can visit:
-#
-#   https://developers.google.com/google-apps/calendar/firstapp
-#
-# For more information on the Calendar API Python library surface you
-# can visit:
-#
-#   https://developers.google.com/resources/api-libraries/documentation/calendar/v3/python/latest/
-#
-# For information on the Python Client Library visit:
-#
-#   https://developers.google.com/api-client-library/python/start/get_started
 if __name__ == '__main__':
   main(sys.argv)

@@ -1,7 +1,7 @@
 from datetime import datetime
 from datetime import timedelta
-from data import Token
-from data import Node
+from data.Token import *
+from data.Node import Node
 
 class Event():
     def __init__(self,event_name,id_,event_date=datetime.now(),start_time=datetime.now(),end_time=datetime.now()+timedelta(0,3600),loc='Somewhere'):
