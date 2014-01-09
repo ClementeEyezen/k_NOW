@@ -20,7 +20,7 @@ class ContactsTest(object):
         self.gd_client.ClientLogin(email, password, self.gd_client.source)
         try:
             query = gdata.contacts.client.ContactsQuery()
-            query.max_results = 10
+            query.max_results = 100
             feed = self.gd_client.GetContacts(q=query) #the feed can be treated like the cal list
             for i, entry in enumerate(feed.entry):
                 try:
@@ -31,14 +31,15 @@ class ContactsTest(object):
                 for email in entry.email:
                     print '    %s' % str(email.address)
                 # Contact ID
-                print 'ID - '+str(entry.name)
-                # Display extended properties.
+                print 'ID - '+str(entry.id.text)
+                '''# Display extended properties.
                 for extended_property in entry.extended_property:
                     if extended_property.value:
                         value = extended_property.value
                     else:
                         value = extended_property.GetXmlBlob()
                     print '    Extended Property - %s: %s' % (extended_property.name, value)
+                '''
         except gdata.client.BadAuthentication:
             print 'Invalid user credentials given.'
 

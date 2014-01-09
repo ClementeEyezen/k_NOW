@@ -7,30 +7,51 @@ import gdata.contacts.data
 
 from data import Token
 
-class Event():
+class Contact():
     def __init__(self,id_,first_name,last_name,email_address,home_phone,mobile_phone,work_phone):
         global fi_name
-        fi_name = first_name
+        fi_name = str(first_name)
         global la_name
-        la_name = last_name
-        global id
-        id = id_
+        la_name = str(last_name)
+        global online_id
+        online_id = str(id_)
         global email_list
+        email_list = []
         if isinstance(email_address,list):
             for email in email_address:
                 email_list.append(str(email))
         else:
             email_list.append(str(email_address))
         global h_phone
-        h_phone = home_phone
+        h_phone = str(home_phone)
         global w_phone
-        w_phone = work_phone
+        w_phone = str(work_phone)
         global m_phone
-        m_phone = mobile_phone
+        m_phone = str(mobile_phone)
     
     def update(self):
         #update contact info, and update the last-updated contact field
         pass
+    
+    def toString(self):
+        '''full=False
+        if(isinstance(full,bool)):
+            if(full):
+                lines = ''+str(fi_name)+' '+str(la_name)+'\n'
+                lines = 'ID:'+lines+str(id)+'\nEMAIL:'
+                for email in email_list:
+                    lines = lines+str(email)+', '
+                lines = lines + '\n'
+                if (h_phone is str and h_phone is not None):
+                    lines = lines+'PHONE (home):'+str(h_phone)+'\n'
+                if (w_phone is str and m_phone is not None):
+                    lines = lines+'PHONE (work):'+str(w_phone)+'\n'
+                if (m_phone is str and m_phone is not None):
+                    lines = lines+'PHONE (cell):'+str(m_phone)+'\n'
+                return lines
+        '''
+        #print 'stringing '+str(online_id[len(online_id)-5:len(online_id)])
+        return str(la_name)+' '+str(online_id[len(online_id)-5:len(online_id)])
     
     def addToken_list(self,item_list):
         #adds tokens from a list
@@ -56,10 +77,14 @@ class Event():
         else:
             return False
         
-    def set_id(self,id):
-        global id_
-        id_ = id
+    def set_id(self,id_):
+        global online_id
+        online_id = id_
         
+    def addEmail(self,item):
+        global email_list
+        email_list.append(str(item))
+    
     def gen_attendee(self):
         #generate/return an attendee output for calendar events
         global email_list
@@ -81,9 +106,9 @@ class Event():
                                            full_name=gdata.data.FullName(text=fi_name+' '+la_name)
                                            )
         #Set the contact's note
-        str = '__Tokens__+\n'
+        stri = '__Tokens__+\n'
         for token in token_list:
-            str = str+token+'\n'
+            stri = stri+token+'\n'
         new_contact.content = atom.data.Content(text=str)
         #Set the contact's email addresses
         for index, email_ in enumerate(email_list):
