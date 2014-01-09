@@ -14,7 +14,7 @@ import gdata.contacts.client
 #   $ python get_contacts_tester.py
 ####################################
 
-class ContactsTest(object):
+class ContactsTest():
     def __init__(self, email, password):
         self.gd_client = gdata.contacts.client.ContactsClient(source='GoogleInc-ContactsPythonSample-1')
         self.gd_client.ClientLogin(email, password, self.gd_client.source)
