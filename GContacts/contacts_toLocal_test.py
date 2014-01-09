@@ -19,10 +19,10 @@ class ContactsLocal(object):
     def __init__(self, email, password):
         self.gd_client = gdata.contacts.client.ContactsClient(source='GoogleInc-ContactsPythonSample-1')
         self.gd_client.ClientLogin(email, password, self.gd_client.source)
-        cont = [None]*90
+        cont = []
         try:
             query = gdata.contacts.client.ContactsQuery()
-            query.max_results = 90
+            query.max_results = 1
             feed = self.gd_client.GetContacts(q=query) #the feed can be treated like the cal list
             for i, entry in enumerate(feed.entry):
                 try:
@@ -47,14 +47,14 @@ class ContactsLocal(object):
                         last_name_ = entry.name.family_name.text
                     except AttributeError, ae:
                         last_name_ = "__none__" 
-                cont[i] = Contact(id_=entry.id.text, 
+                lol = Contact(id_=entry.id.text, 
                               first_name=first_name_, 
                               last_name=last_name_, 
                               email_address=email_list,
                               home_phone = None,
                               mobile_phone = None,
                               work_phone=None)
-                            
+                cont.append(lol)
                 #end local creation and printing
             print 'cont (length'+str(len(cont))+')'
             print cont
