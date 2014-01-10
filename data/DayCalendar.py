@@ -1,9 +1,9 @@
 from datetime import time
 from datetime import date
 from datetime import datetime
-from Token import Token
-from Event import Event
-from Day import Day
+from data.Token import Token
+from data.Event import Event
+from data.Day import Day
 
 #A Calendar is a list of events
 
