@@ -128,7 +128,7 @@ class CalendarManager():
                 for event in event_list['items']:
                     try:
                         #print event['summary']
-                        write_str = 'name:{'+(event['summary']+'          ')[0:10]+'} id:{'+(str(event['id']))+'} \n'
+                        write_str = 'name:{'+str(event['summary'])+'} id:{'+(str(event['id']))+'} \n'
                     except KeyError,ke:
                         print "Key Error "+str(ke)
                         write_str = 'default'
@@ -157,7 +157,7 @@ class CalendarManager():
                     temp_id = line[5:len(line)] 
             else:
                 #create events and add to calendar
-                pass
+                list_of_events.append(self.processLine(line))
             lol = SimpleCalendar(name_=temp_name,id_=temp_id)
             lol.addEvents(list_of_events)
         if temp_name != '' and temp_id != '':
@@ -187,6 +187,18 @@ class CalendarManager():
                     print "Simple Calendar"
                 elif cal is DayCalendar:
                     print cal.toString()
+    def processLine(self,event_line):
+        if not isinstance(event_line, str):
+            pass
+        else:
+            if event_line[0:6] == 'name:{':
+                summary_start_index = 6
+                summary_end_index = str(event_line[6:len(event_line)]).find('}')+6
+                if event_line[summary_end_index:summary_end_index+6] == '} id:{':
+                    id_start_index = summary_end_index+7
+                    id_end_index = str(event_line[summary_end_index+1:len(event_line)]).find('}')+summary_end_index+1
+                    return Event(event_name=event_line[summary_start_index:summary_end_index],id_=event_line[id_start_index:id_end_index])
+                
                     
 def test():
     #add the file location

@@ -17,10 +17,11 @@ class SimpleCalendar():
                 event_list.append(e)
     def addEvent(self,item):
         if isinstance(item,Event):
-            
+            pass
     
-    def removeEvent(self):
-        pass
+    def removeEvent(self,item):
+        if isinstance(item,Event):
+            pass
     
     def clearEvents(self):
         event_list = []
