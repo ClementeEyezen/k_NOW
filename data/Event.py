@@ -21,9 +21,14 @@ class Event():
         e_time = end_time
         global location
         location = loc
-        if event_date is date:
-            global day
-            day = event_date.day()
+        '''if event_date is date:
+            global days
+            days = event_date.day()
+        '''
+    
+    def getName(self):
+        global name
+        return name
     
     def addToken(self,item):
         #adds tokens that are associated with this event

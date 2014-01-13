@@ -35,12 +35,12 @@ class CalendarManager():
         http = httplib2.Http()
         http = credentials.authorize(http)
         #set the calendar access service
-        global service
-        service = discovery.build('calendar', 'v3', http=http)
+        global __service__
+        __service__ = discovery.build('calendar', 'v3', http=http)
         try:
             #code here
             #start up by writing all of the calendar files
-            self.start(service)
+            self.start(__service__)
         except client.AccessTokenRefreshError:
             print ("The credentials have been revoked or expired, please re-run"
                "the application to re-authorize")
@@ -90,8 +90,7 @@ class CalendarManager():
                     #print file1
                     if True:
                         f=open(file1, 'r')
-                        #take action
-                        #print f
+                        self.addCalendar(self.calFromFile(f))
                         existing_cal_files = True
                         f.close()
                     #except IOError:
@@ -122,7 +121,7 @@ class CalendarManager():
                 file1.write('name '+str(temp_name)+"\n")
                 file1.write('id   '+str(temp_id)+"\n")
                 file1.write('__events__')
-                event_list = service.events().list(calendarId=calendar_list_entry['id'],
+                event_list = cal_api_service.events().list(calendarId=calendar_list_entry['id'],
                                                        singleEvents=True,
                                                        orderBy='startTime').execute()
                 for event in event_list['items']:
@@ -140,7 +139,11 @@ class CalendarManager():
                 break
     
     def calFromFile(self,file_):
-        file1 = open(file_,'r')
+        count = 0
+        try:
+            file1 = open(file_,'r')
+        except:
+            file1 = file_
         meta_cal_mode = False
         temp_name = ''
         temp_id = ''
@@ -157,11 +160,21 @@ class CalendarManager():
                     temp_id = line[5:len(line)] 
             else:
                 #create events and add to calendar
-                list_of_events.append(self.processLine(line))
-            lol = SimpleCalendar(name_=temp_name,id_=temp_id)
-            lol.addEvents(list_of_events)
-        if temp_name != '' and temp_id != '':
-            self.addCalendar(lol)
+                try:
+                    print 'line processed'+str(self.processLine(line).getName())
+                    list_of_events.append(self.processLine(line))
+                except AttributeError, ae:
+                    print 'aterror '+str(ae)
+                    count = count + 1
+                    print 'count = '+str(count)
+            #lol = 
+            #print str(list_of_events)
+            #lol.addEvents(list_of_events)
+            #print 'lolcats'+str(lol.getName())
+        #if temp_name != '' and temp_id != '':
+        self.addCalendar(SimpleCalendar(name_=temp_name,id_=temp_id,list_of_events=list_of_events))
+        print 'cal list '+str(calendar_list)
+        print 'lol'
         
         file1.close()
     
@@ -184,7 +197,7 @@ class CalendarManager():
             if cal.name == cal_name:
                 print str(cal.name)
                 if cal is SimpleCalendar:
-                    print "Simple Calendar"
+                    print "Simple Calendar"+cal.name
                 elif cal is DayCalendar:
                     print cal.toString()
     def processLine(self,event_line):
@@ -197,13 +210,27 @@ class CalendarManager():
                 if event_line[summary_end_index:summary_end_index+6] == '} id:{':
                     id_start_index = summary_end_index+7
                     id_end_index = str(event_line[summary_end_index+1:len(event_line)]).find('}')+summary_end_index+1
+                    print 'name = '+event_line[summary_start_index:summary_end_index]
+                    print 'id   = '+event_line[id_start_index:id_end_index]
                     return Event(event_name=event_line[summary_start_index:summary_end_index],id_=event_line[id_start_index:id_end_index])
-                
+    def printAllCalendars(self):
+        print 'printing all calendars'
+        print 'calendar_list = '
+        print calendar_list
+        for cal_obj in calendar_list:
+            print self.printCalendar(cal_obj)
+    
+    def getService(self):
+        return __service__
                     
 def test():
     #add the file location
     secret_location = os.path.join(os.path.dirname('..'), 'client_secrets.json')
     cm = CalendarManager(client_secrets=secret_location)
+    cm.update(cm.getService())
+    print 'didn\'t clear'
+    print '\n\n\n\n\n\n'
+    cm.printAllCalendars()
     
 if __name__=='__main__':
     test()

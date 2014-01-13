@@ -9,7 +9,11 @@ class SimpleCalendar():
         name = name_
         global __id__
         __id__ = id_
-
+    
+    def getName(self):
+        global name
+        return name
+    
     def addEvents(self,list_of_events):
         global event_list
         if isinstance(list_of_events, list):
