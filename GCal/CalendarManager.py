@@ -41,6 +41,11 @@ class CalendarManager():
             #code here
             #start up by writing all of the calendar files
             self.start(__service__)
+            global __last_update__
+            __last_update__ = str(datetime.now())
+            print 'updated time time time :'+str(__last_update__)
+            __last_update__ = __last_update__.replace(" ", "T")
+            __last_update__ = __last_update__[0:len(__last_update__)-3]
         except client.AccessTokenRefreshError:
             print ("The credentials have been revoked or expired, please re-run"
                "the application to re-authorize")
@@ -137,6 +142,11 @@ class CalendarManager():
             page_token = calendar_list.get('nextPageToken')
             if not page_token:
                 break
+        global __last_update__
+        __last_update__ = str(datetime.now())
+        __last_update__ = __last_update__.replace(' ','T')
+        __last_update__ = __last_update__[0:len(__last_update__)]
+        print 'updated time time time :'+str(__last_update__)
     
     def calFromFile(self,file_):
         count = 0
@@ -179,18 +189,77 @@ class CalendarManager():
         file1.close()
     
     def update(self,cal_api_service):
-        for cal in calendar_list:
+        '''for cal in calendar_list:
+            #global __last_updated__
             event_list = cal_api_service.events().list(calendarID=cal.online_id,
                                                        orderBy='startTime',
-                                                       minAccessRole='reader'
+                                                       minAccessRole='reader'#,
+                                                       #updatedMin = __last_updated__
                                                         ).execute()
+            
             for event in event_list:
-                local_event = Event(event_name=event['summary'],
+                #local_event = Event(event_name=event['summary'],
+                #                    online_id=event['id'],
+                #                    event_date=event['start']['date'],
+                #                    start_time=event['start']['datetime'],
+                #                    end_time=event['end']['datetime'])
+                cal.addEvent(Event(event_name=event['summary'],
                                     online_id=event['id'],
                                     event_date=event['start']['date'],
                                     start_time=event['start']['datetime'],
-                                    end_time=event['end']['datetime'])
-                cal.addEvent(local_event)
+                                    end_time=event['end']['datetime']))
+                #del local_event
+            print '-----------------Test Line-----------------'
+            for event in cal.event_list:
+                print event.id_
+            '''
+        page_token = None
+        while True:
+            calendar_list = cal_api_service.calendarList().list(#maxResults=100,
+                                                        minAccessRole='reader',
+                                                        pageToken=page_token#,
+                                                        ).execute()
+            for calendar_list_entry in calendar_list['items']:
+                self.addCalendar(calendar_list_entry)
+                temp_name = calendar_list_entry['summary']
+                #print temp_name
+                temp_id = calendar_list_entry['id']
+                #print temp_id
+                filename = os.path.join(os.path.dirname(__file__)+'/manager/',
+                                        str(temp_name)+'.cal')
+                filename = str(filename).replace(" ", '_')
+                mode = 'a' #'w' for write, 'a' for append, 'r' for read, 'r+' for read/write
+                file1 = open(filename,mode)
+                #print file1
+                #file1.write('__calendar__')
+                #file1.write('name '+str(temp_name)+"\n")
+                #file1.write('id   '+str(temp_id)+"\n")
+                file1.write('__updated__')
+                file1.write(str(datetime.now())+'\n')
+                file1.write('__events__\n')
+                event_list = cal_api_service.events().list(calendarId=calendar_list_entry['id'],
+                                                           singleEvents=True,
+                                                           orderBy='startTime',
+                                                           updatedMin = __last_update__
+                                                           ).execute()
+                for event in event_list['items']:
+                    try:
+                        #print event['summary']
+                        write_str = 'name:{'+str(event['summary'])+'} id:{'+(str(event['id']))+'} \n'
+                    except KeyError,ke:
+                        print "Key Error "+str(ke)
+                        write_str = 'default'
+                    file1.write(write_str)
+                file1.close()
+
+            page_token = calendar_list.get('nextPageToken')
+            if not page_token:
+                break
+        global __last_update__
+        __last_update__ = str(datetime.now())
+        __last_update__ = __last_update__.replace(" ", "T")
+        __last_update__ = __last_update__[0:len(__last_update__)-3]
+            
     
     def printCalendar(self,cal_name):
         for cal in calendar_list:
@@ -214,8 +283,6 @@ class CalendarManager():
                     print 'id   = '+event_line[id_start_index:id_end_index]
                     return Event(event_name=event_line[summary_start_index:summary_end_index],id_=event_line[id_start_index:id_end_index])
     def printAllCalendars(self):
-        print 'printing all calendars'
-        print 'calendar_list = '
         print calendar_list
         for cal_obj in calendar_list:
             print self.printCalendar(cal_obj)
@@ -227,10 +294,10 @@ def test():
     #add the file location
     secret_location = os.path.join(os.path.dirname('..'), 'client_secrets.json')
     cm = CalendarManager(client_secrets=secret_location)
+    print 'begin run update'
     cm.update(cm.getService())
     print 'didn\'t clear'
     print '\n\n\n\n\n\n'
-    cm.printAllCalendars()
     
 if __name__=='__main__':
     test()
