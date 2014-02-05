@@ -183,6 +183,9 @@ class CalendarManager():
             #print 'lolcats'+str(lol.getName())
         #if temp_name != '' and temp_id != '':
         self.addCalendar(SimpleCalendar(name_=temp_name,id_=temp_id,list_of_events=list_of_events))
+        del temp_name
+        del temp_id
+        del list_of_events
         print 'cal list '+str(calendar_list)
         print 'lol'
         
@@ -237,10 +240,11 @@ class CalendarManager():
                 file1.write('__updated__')
                 file1.write(str(datetime.now())+'\n')
                 file1.write('__events__\n')
+                print "updated min check "+str(__last_update__)
                 event_list = cal_api_service.events().list(calendarId=calendar_list_entry['id'],
                                                            singleEvents=True,
-                                                           orderBy='startTime',
-                                                           updatedMin = __last_update__
+                                                           orderBy='startTime'#,
+                                                           #updatedMin = __last_update__+'-5:00'
                                                            ).execute()
                 for event in event_list['items']:
                     try:
