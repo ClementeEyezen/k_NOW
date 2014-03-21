@@ -17,13 +17,14 @@ Contact.Contact = Contact
 
 class ContactsLocal():
     def __init__(self, email, password):
-        self.gd_client = gdata.contacts.client.ContactsClient(source='GoogleInc-ContactsPythonSample-1')
+        self.gd_client = gdata.contacts.client.ContactsClient(source='[k]NOW')
         self.gd_client.ClientLogin(email, password, self.gd_client.source)
         cont = []
         try:
             query = gdata.contacts.client.ContactsQuery()
-            query.max_results = 1
+            #query.max_results = 1
             feed = self.gd_client.GetContacts(q=query) #the feed can be treated like the cal list
+            cont = [None]*len(feed.entry)
             for i, entry in enumerate(feed.entry):
                 try:
                     print '\n%s %s' % (i+1, entry.name.full_name.text)+" - "
@@ -54,14 +55,22 @@ class ContactsLocal():
                               home_phone = None,
                               mobile_phone = None,
                               work_phone=None)
-                cont.append(lol)
+                cont[i] = lol
+                del lol
+                del first_name_
+                del last_name_
+                del email_list
+                try:
+                    print 'lolol '+str(cont[len(cont)-2])+' llloo '+str(cont[len(cont)-1])
+                except:
+                    pass
                 #end local creation and printing
             print 'cont (length'+str(len(cont))+')'
             print cont
             print 'local contact test'
             party = 0
-            while(party<len(cont)):
-                print str(party)+' '+str(cont[party].toString())
+            for person in cont:
+                print str(party+1)+' '+str(person.toString())
                 party = party + 1
             print 'end local contact test'
         except gdata.client.BadAuthentication:
