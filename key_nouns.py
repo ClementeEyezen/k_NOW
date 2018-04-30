@@ -46,6 +46,13 @@ if __name__ == '__main__':
 
         for ent in doc.ents:
             print(ent.text, '->', ent.label_, '->', spacy.explain(ent.label_))
+            thing = Word(ent.text)
+            concepts = thing.get_synsets(pos=NOUN)
+            for synset in concepts:
+                print(synset, '->', synset.definition())
+                # TODO(buckbaskin): pick best concept match? or weight edge of matches with max similarity
+                for lemma_name in synset.lemma_names():
+                    print(lemma_name, '->', nlp(str(noun)).similarity(nlp(str(lemma_name))))
         1/0
 
         # deal with time
