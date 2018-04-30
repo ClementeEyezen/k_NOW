@@ -1,0 +1,126 @@
+{
+  "status": "ok",
+  "totalResults": 10,
+  "articles": [
+    {
+      "source": {
+        "id": "associated-press",
+        "name": "Associated Press"
+      },
+      "author": "JOSEF FEDERMAN",
+      "title": "Israel says documents prove Iran lied about nuclear program",
+      "description": "JERUSALEM (AP) — Israel's prime minister on Monday unveiled what he said was a \"half ton\" of Iranian nuclear documents collected by Israeli intelligence, claiming it proved that Iranian leaders covered up a nuclear weapons program before signing a deal with w…",
+      "url": "https://apnews.com/d25379a560ab4643b924e960ba1c0c57",
+      "urlToImage": "https://storage.googleapis.com/afs-prod/media/media:0f728ab054aa492f8ba00a3effc73d61/3000.jpeg",
+      "publishedAt": "2018-04-30T19:19:02Z"
+    },
+    {
+      "source": {
+        "id": "associated-press",
+        "name": "Associated Press"
+      },
+      "author": "ELLIOT SPAGAT",
+      "title": "Central American asylum seekers denied US entry for 2nd day",
+      "description": "TIJUANA, Mexico (AP) — About 200 people in a caravan of Central American asylum seekers waited on the Mexican border with San Diego for a second straight day on Monday to turn themselves in to U.S. border inspectors, who said the nation's busiest crossing fac…",
+      "url": "https://apnews.com/1132da4f9f744002afbb38a7dd28260a",
+      "urlToImage": "https://storage.googleapis.com/afs-prod/media/media:02bad58648eb48e59c099fb3bf196fee/3000.jpeg",
+      "publishedAt": "2018-04-30T19:06:36Z"
+    },
+    {
+      "source": {
+        "id": "associated-press",
+        "name": "Associated Press"
+      },
+      "author": "CATHERINE LUCEY",
+      "title": "Porn star Stormy Daniels sues President Trump for defamation",
+      "description": "WASHINGTON (AP) — The porn actress alleging a sexual encounter with President Donald Trump is escalating her legal fight, suing the president for defamation. Stormy Daniels filed the complaint in federal court in New York on Monday. At issue is a tweet Trump …",
+      "url": "https://apnews.com/37b0ee1598f14c118885ef33403ff69b",
+      "urlToImage": "https://storage.googleapis.com/afs-prod/media/media:f6561c28aa024ad8810cc9fed3107a5e/3000.jpeg",
+      "publishedAt": "2018-04-30T18:45:28Z"
+    },
+    {
+      "source": {
+        "id": "associated-press",
+        "name": "Associated Press"
+      },
+      "author": "RAHIM FAIEZ and AMIR SHAH",
+      "title": "Twin bombings in Afghanistan kill 25, including 9 reporters",
+      "description": "KABUL, Afghanistan (AP) — Two Islamic State suicide bombers struck in Afghanistan's capital on Monday, killing 25 people, including nine journalists who had rushed to the scene of the first attack, in the deadliest assault on reporters since the fall of the T…",
+      "url": "https://apnews.com/d80de03712f3400ab31b5d28ef3ec3ab",
+      "urlToImage": "https://storage.googleapis.com/afs-prod/media/media:f2a2d1e3a0294012b9f4d01a6f42715c/3000.jpeg",
+      "publishedAt": "2018-04-30T18:33:08Z"
+    },
+    {
+      "source": {
+        "id": "associated-press",
+        "name": "Associated Press"
+      },
+      "author": "COREY WILLIAMS",
+      "title": "Detroit released from active state oversight of finances",
+      "description": "DETROIT (AP) — Michigan on Monday returned financial control of Detroit to the city's mayor and council, just over three years after the Motor City exited the largest municipal bankruptcy in U.S. history. A nine-member review commission unanimously voted on a…",
+      "url": "https://apnews.com/45d86a7d4b154d4c91bbd1d1b8654f7b",
+      "urlToImage": "",
+      "publishedAt": "2018-04-30T18:11:06Z"
+    },
+    {
+      "source": {
+        "id": "associated-press",
+        "name": "Associated Press"
+      },
+      "author": "STAN CHOE and TALI ARBEL",
+      "title": "Sprint, T-Mobile have to sell $26.5B deal to antitrust cops",
+      "description": "NEW YORK (AP) — To gain approval for their $26.5 billion merger agreement, T-Mobile and Sprint aim to convince antitrust regulators that there is plenty of competition for wireless service beyond Verizon and AT&amp;T. The deal announced Sunday would combine t…",
+      "url": "https://apnews.com/f287728dd8604da59318b5f173d32ffd",
+      "urlToImage": "https://storage.googleapis.com/afs-prod/media/media:389a6a3e46f4407badd11fbe13d2f218/3000.jpeg",
+      "publishedAt": "2018-04-30T18:06:51Z"
+    },
+    {
+      "source": {
+        "id": "associated-press",
+        "name": "Associated Press"
+      },
+      "author": "BASSEM MROUE and SARAH EL DEEB",
+      "title": "Missile strikes in Syria kill over a dozen, mostly Iranians",
+      "description": "BEIRUT (AP) — A missile attack on government outposts in northern Syria killed more than a dozen pro-government fighters, many of them Iranians, a war monitoring group and an Iranian news agency said Monday. The strikes came amid soaring tensions between regi…",
+      "url": "https://apnews.com/89c19b1d9cff48baa6243be5e84ea293",
+      "urlToImage": "https://storage.googleapis.com/afs-prod/media/media:445bf2455dcc4236899a74ef37982a5a/3000.jpeg",
+      "publishedAt": "2018-04-30T17:54:13Z"
+    },
+    {
+      "source": {
+        "id": "associated-press",
+        "name": "Associated Press"
+      },
+      "author": "JAMEY KEATEN",
+      "title": "4 climbers die in Swiss Alps after unexpected storm",
+      "description": "GENEVA (AP) — An unexpected snowstorm coupled with high winds killed four climbers in the Swiss Alps and left five others in critical condition early Monday after they became trapped overnight and couldn't reach shelter, officials said. A total of 14 hikers f…",
+      "url": "https://apnews.com/fed6c9bf11534201803b2e096cfd0268",
+      "urlToImage": "https://storage.googleapis.com/afs-prod/media/media:ce82f0771d2949f3b6e423c9a5403f04/3000.jpeg",
+      "publishedAt": "2018-04-30T17:04:48Z"
+    },
+    {
+      "source": {
+        "id": "associated-press",
+        "name": "Associated Press"
+      },
+      "author": "JILL LAWLESS",
+      "title": "New UK interior minister vows to resolve immigration scandal",
+      "description": "LONDON (AP) — Britain's new interior minister vowed Monday to sort out an immigration scandal shaking the government, saying that as the child of immigrants he was angered by the mistreatment of long-term residents from the Caribbean. Home Secretary Sajid Jav…",
+      "url": "https://apnews.com/c7cea70a47e4425fbb6d658496e038d4",
+      "urlToImage": "https://storage.googleapis.com/afs-prod/media/media:71fb7d8ddc5e4949ade892cb874f89f7/3000.jpeg",
+      "publishedAt": "2018-04-30T17:01:28Z"
+    },
+    {
+      "source": {
+        "id": "associated-press",
+        "name": "Associated Press"
+      },
+      "author": "JILL COLVIN",
+      "title": "In Trump era, the death of the White House press conference",
+      "description": "WASHINGTON (AP) — The presidential news conference, a time-honored tradition going back generations, appears to be no longer. More than a year has passed since President Donald Trump held the only solo news conference of his administration — a rollicking, has…",
+      "url": "https://apnews.com/f29a23df19214466b226e2cbdec78cbd",
+      "urlToImage": "https://storage.googleapis.com/afs-prod/media/media:acb722245d5949ccb381aafb9df7b2bc/3000.jpeg",
+      "publishedAt": "2018-04-30T11:40:45Z"
+    }
+  ]
+}

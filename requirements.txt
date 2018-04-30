@@ -10,4 +10,3 @@ pandas
 spacy
 textblob
 gensim
-
