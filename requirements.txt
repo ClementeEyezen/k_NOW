@@ -1,0 +1,13 @@
+pip
+tqdm
+
+numpy
+scipy
+scikit-learn
+scikit-image
+pandas
+
+spacy
+textblob
+gensim
+
